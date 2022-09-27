@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<title>Meida Notas</title>
+
+<body>
+    <script>
+        var notas = [];
+        var numNotas = prompt("¿Cuantas notas quieres introducir?");
+        var media = 0;
+        for (var i = 0; i < numNotas; i++) {
+            notas.push(parseInt(prompt("Escriba una nota:")));
+            media += notas[i];
+        }
+        media = media / numNotas;
+        alert("La media es: " + media);
+    </script>
+</body>

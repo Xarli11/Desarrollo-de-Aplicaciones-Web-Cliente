@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<title>Mayor y Menor</title>
+
+<body>
+    <script>
+        var nombres = [];
+        var edades = [];
+        var mayor = 0;
+        var menor=0;
+        var numNombres = parseInt(prompt("¿Cuantos nombres quieres introducir?"));
+        for (var i = 0; i < numNombres; i++) {
+            nombres.push(prompt("Introduzca el nombre:"));
+            edades.push(parseInt(prompt("Introduzca la edad: ")));
+        }
+        for (var i = 1; i < numNombres; i++) {
+            if (edades[mayor] < edades[i]) {
+                mayor = i;
+            }
+            if (edades[menor] > edades[i]) {
+                menor = i;
+            }
+        }
+        alert("El mayor es: " + nombres[mayor])
+        alert("El menor es: " + nombres[menor])
+    </script>
+</body>
