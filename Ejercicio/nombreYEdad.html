@@ -2,25 +2,42 @@
 <title>Mayor y Menor</title>
 
 <body>
+    Nombre: <input type="text" id="nombre" /><br>
+    Edad: <input type="text" id="edad" /><br>
+    <input type="button" value="Guardar" onclick="guardardatos()" />
+    <input type="button" value="Mayor" onclick="mostrarmayor()">
+    <input type="button" value="Menor" onclick="mostrarmenor()">
+
     <script>
+        
         var nombres = [];
         var edades = [];
         var mayor = 0;
         var menor=0;
-        var numNombres = parseInt(prompt("¿Cuantos nombres quieres introducir?"));
-        for (var i = 0; i < numNombres; i++) {
-            nombres.push(prompt("Introduzca el nombre:"));
-            edades.push(parseInt(prompt("Introduzca la edad: ")));
+        function guardardatos(){
+            var nombre = document.getElementById("nombre").value;
+            var edad = document.getElementById("edad").value;
+            nombres.push(nombre);
+            edades.push(edad);
+            document.getElementById("nombre").value = "";
+            document.getElementById("edad").value = "";
+            alert("Datos guardados");
         }
-        for (var i = 1; i < numNombres; i++) {
-            if (edades[mayor] < edades[i]) {
-                mayor = i;
+        function mostrarmayor(){
+            for (var i = 1; i < edades.length; i++) {
+                if (edades[i]>edades[mayor]) {
+                    mayor=i;
+                }
             }
-            if (edades[menor] > edades[i]) {
-                menor = i;
-            }
+            alert("La edad mayor es: "+edades[mayor] + " y el nombre es: "+nombres[mayor]);
         }
-        alert("El mayor es: " + nombres[mayor])
-        alert("El menor es: " + nombres[menor])
+        function mostrarmenor(){
+            for (var i = 1; i < edades.length; i++) {
+                if (edades[i]<edades[menor]) {
+                    menor=i;
+                }
+            }
+            alert("La edad menor es: "+edades[menor] + " y el nombre es: "+nombre[menor]);
+        }
     </script>
 </body>
