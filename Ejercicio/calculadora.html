@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html_lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Calculadora</title>
+    </head>
+
+    <body>
+        <table>
+            <tr>
+                <td><input type="text" id="text"></td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" id="nulo" value="CE">
+                    <input type="button" name="boton" value="0">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" name="boton" value="1">
+                    <input type="button" name="boton" value="2">
+                    <input type="button" name="boton" value="3">
+                </td>
+            </tr>
+            <tr>
+                <td><input type="button" name="boton" value="4">
+                    <input type="button" name="boton" value="5">
+                    <input type="button" name="boton" value="6">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" name="boton" value="7">
+                    <input type="button" name="boton" value="8">
+                    <input type="button" name="boton" value="9">
+                </td>
+            </tr>
+            <tr>
+
+        </table>
+
+        <script>
+            window.onload = function () {
+                var botones = document.getElementsByName("boton");
+                for (var i = 0; i < botones.length; i++) {
+                    botones[i].onclick = añadir;
+                }
+                document.getElementById("nulo").onclick = borrar;
+            }
+            function borrar() {
+                var texto = document.getElementById("text").value = "";
+            }
+            function añadir() {
+                // A la hora de guardar un nodo se puede hacer de varias formas:
+                /*
+                1.Guardando un array de nodos y accediendo a cada array con un indice ç
+                y el nombre del array
+                2. Guardando 1 solo nodo con getElementById y solo se guarda un nodo
+                */
+                var numero = document.getElementById("text");
+                numero.value += this.value;
+            }
+        </script>
+    </body>
+
+    </html>
