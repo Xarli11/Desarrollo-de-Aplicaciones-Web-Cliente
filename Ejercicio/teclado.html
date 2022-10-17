@@ -9,6 +9,8 @@
     var mostrar = [];
     var isShift = false;
     var isMayus = false;
+    var index = 0;
+    var indexMax=0;
     window.onload = function () {
         var Letras = document.getElementsByName("tecla");
         for (var i = 0; i < Letras.length; i++) {
@@ -37,92 +39,94 @@
 
             }
         }
-            else if (isShift == false || isMayus == false) {
-                document.getElementById("pantalla").value = document.getElementById("pantalla").value + this.value;
-            }
+        else if (isShift == false || isMayus == false) {
+            document.getElementById("pantalla").value = document.getElementById("pantalla").value + this.value;
         }
-        function Limpiar() {
-            var texto = document.getElementById("pantalla");
-            texto.value = "";
+    }
+    function Limpiar() {
+        var texto = document.getElementById("pantalla");
+        texto.value = "";
+    }
+    function Retroceso() {
+        var texto = document.getElementById("pantalla");
+        texto.value = texto.value.substring(0, texto.value.length - 1);
+    }
+    function Mayus() {
+        if (isMayus == true) {
+            isMayus = false;
         }
-        function Retroceso() {
-            var texto = document.getElementById("pantalla");
-            texto.value = texto.value.substring(0, texto.value.length - 1);
+        else if (isMayus == false) {
+            isMayus = true;
         }
-        function Mayus() {
-            if (isMayus == true) {
-                isMayus = false;
-            }
-            else if (isMayus == false) {
-                isMayus = true;
-            }
+    }
+    function Shift() {
+        isShift = true;
+    }
+    function Mostrar() {
+        document.getElementById("primero").disabled = false;
+        document.getElementById("retroceder").disabled = false;
+        document.getElementById("avanzar").disabled = false;
+        document.getElementById("ultimo").disabled = false;
+        document.getElementById("limpiar").disabled = true;
+        document.getElementById("retro").disabled = true;
+        document.getElementById("mayus").disabled = true;
+        document.getElementById("guardar").disabled = true;
+        document.getElementById("shift").disabled = true;
+        document.getElementById("mostrar").disabled = true;
+        document.getElementById("teclea").disabled = false;
+        var a = document.getElementsByName("tecla");
+        for (var i = 0; i < a.length; i++) {
+            a[i].disabled = true;
         }
-        function Shift() {
-            isShift = true;
+        document.getElementById("pantalla").value = mostrar[0];
+    }
+    function Teclea() {
+        document.getElementById("primero").disabled = true;
+        document.getElementById("retroceder").disabled = true;
+        document.getElementById("avanzar").disabled = true;
+        document.getElementById("ultimo").disabled = true;
+        document.getElementById("limpiar").disabled = false;
+        document.getElementById("retro").disabled = false;
+        document.getElementById("mayus").disabled = false;
+        document.getElementById("guardar").disabled = false;
+        document.getElementById("shift").disabled = false;
+        document.getElementById("mostrar").disabled = false;
+        document.getElementById("teclea").disabled = true;
+        var a = document.getElementsByName("tecla");
+        for (var i = 0; i < a.length; i++) {
+            a[i].disabled = false;
         }
-        function Mostrar() {
-            document.getElementById("primero").disabled = false;
-            document.getElementById("retroceder").disabled = false;
-            document.getElementById("avanzar").disabled = false;
-            document.getElementById("ultimo").disabled = false;
-            document.getElementById("limpiar").disabled = true;
-            document.getElementById("retro").disabled = true;
-            document.getElementById("mayus").disabled = true;
-            document.getElementById("guardar").disabled = true;
-            document.getElementById("shift").disabled = true;
-            document.getElementById("mostrar").disabled = true;
-            document.getElementById("teclea").disabled = false;
-            var a = document.getElementsByName("tecla");
-            for (var i = 0; i < a.length; i++) {
-                a[i].disabled = true;
-            }
-            document.getElementById("pantalla").value = mostrar[0];
+        document.getElementById("pantalla").value = "";
+    }
+    function Guardar() {
+        var texto = document.getElementById("pantalla");
+        mostrar.push(texto.value);
+        texto.value = "";
+        indexMax++;
+    }
+    function Primero() {
+        index = 0;
+        document.getElementById("pantalla").value = mostrar[index];
+    }
+    function Retroceder() {
+        var texto = document.getElementById("pantalla");
+        if(index>0){
+            index--;
+            texto.value=mostrar[index];
         }
-        function Teclea() {
-            document.getElementById("primero").disabled = true;
-            document.getElementById("retroceder").disabled = true;
-            document.getElementById("avanzar").disabled = true;
-            document.getElementById("ultimo").disabled = true;
-            document.getElementById("limpiar").disabled = false;
-            document.getElementById("retro").disabled = false;
-            document.getElementById("mayus").disabled = false;
-            document.getElementById("guardar").disabled = false;
-            document.getElementById("shift").disabled = false;
-            document.getElementById("mostrar").disabled = false;
-            document.getElementById("teclea").disabled = true;
-            var a = document.getElementsByName("tecla");
-            for (var i = 0; i < a.length; i++) {
-                a[i].disabled = false;
-            }
-            document.getElementById("pantalla").value = "";
-        }
-        function Guardar() {
-            var texto = document.getElementById("pantalla");
-            mostrar.push(texto.value);
-            texto.value = "";
-        }
-        function Primero() {
-            document.getElementById("pantalla").value = mostrar[0];
-        }
-        function Retroceder() {
-            var texto = document.getElemenstById("pantalla");
-            for (var i = 0; i < mostrar.length; i++) {
-                if (texto.value == mostrar[i]) {
-                    texto.value = mostrar[i - 1];
-                }
-            }
-        }
-        function Avanzar() {
-            var texto = document.getElementById("pantalla");
-            for (var i = 0; i < mostrar.length; i++) {
-                if (texto.value == mostrar[i]) {
-                    texto.value = mostrar[i + 1];
-                }
-            }
-        }
-        function Ultimo() {
-            document.getElementById("pantalla").value = mostrar[mostrar.length - 1];
-        }
+        
+    }
+    function Avanzar() {
+        var texto = document.getElementById("pantalla");
+       if(index!=mostrar.length-1){
+              index++;
+              texto.value=mostrar[index];
+       }
+    }
+    function Ultimo() {
+        index = mostrar.length - 1;
+        document.getElementById("pantalla").value = mostrar[index];
+    }
 
 
 </script>
