@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Botones</title>
+</head>
+
+<body>
+    <script>
+        let numBotones = prompt("Cuantos botones quieres crear?");
+        window.onload=function(){
+        for (var i = 1; i <= numBotones; i++) {
+            var button = document.createElement("input");
+            button.type = "button";
+            button.value = "Boton " + i;
+            button.id = "boton" + i;
+            var div = document.getElementById("div");
+            div.appendChild(button);
+            let parrafo = document.createElement("p");
+            div.appendChild(parrafo);
+
+        }
+        var clear = document.createElement("input");
+        clear.type = "button";
+        clear.value = "Borrar";
+        clear.id = "clear";
+        var div = document.getElementById("div");
+        div.appendChild(clear);
+        document.getElementById("clear").onclick = borrar;
+        for (var i = 1; i <= numBotones; i++) {
+            document.getElementById("boton" + i).onclick = clickBoton;
+        }
+    }
+        function borrar() {
+            for (var i = 1; i <= numBotones; i++) {
+                var boton = document.getElementById("boton" + i);
+                boton.parentNode.removeChild(boton);
+            }
+        }
+        function clickBoton() {
+            alert("Has pulsado el boton " + this.value);
+        }
+
+    </script>
+    <div id="div"></div>
+</body>

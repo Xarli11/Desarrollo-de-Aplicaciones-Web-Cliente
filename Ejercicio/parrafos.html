@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+    <title>PARRAFOS</title>
+</head>
+<script>
+    window.onload = function () {
+        var numPararfos = prompt("¿Cuántos parrafos quieres?");
+        var numero = parseInt(numPararfos);
+        var division = document.getElementById("div1");
+
+        for (var i = 0; i < numero; i++) {
+            var parrafo = document.createElement("p");
+            parrafo.id = "parrafo" + (i + 1);
+            var texto = prompt("Introduce el texto que quieres");
+            var contenido = document.createTextNode(texto);
+            parrafo.appendChild(contenido);
+            division.appendChild(parrafo);
+        }
+
+        var borrar = document.getElementById("borrar");
+        borrar.onclick = borrarParrafos;
+    }
+
+    function borrarParrafos() {
+        var parrafillos = document.getElementsByTagName("p");
+        var numborparr = prompt("¿Cuál parrafo quieres borrar?");
+        var numero = parseInt(numborparr);
+        parrafillos[numero - 1].parentNode.removeChild(parrafillos[numero - 1]);
+    }
+
+
+</script>
+
+<body>
+    <div id="div1"></div>
+    <input type="button" id="borrar" value="Borrar texto" />
+
+</body>
+
+</html>
+</body>
+
+</html>
