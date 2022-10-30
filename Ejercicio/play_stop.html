@@ -1,18 +1,11 @@
-<<<<<<< HEAD
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 tdansitional//EN" "http://www.w3.org/td/xhtml1/DTD/xhtml1-tdansitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-=======
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 tdansitional//EN" "http://www.w3.org/td/xhtml1/DTD/xhtml1-tdansitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
->>>>>>> 6286d7de3ca4d636e849d6866bbe09c589ffa6d0
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title></title>
 	<script type="text/javascript">
-<<<<<<< HEAD
 
 		window.onload = function () {
 
@@ -109,97 +102,3 @@
 </body>
 
 </html>
-=======
-		
-		window.onload = function () {
-
-			var inicio =document.getElementById("play");
-			inicio.onclick = empezar;
-			var borrar =document.getElementById("stop");
-			borrar.onclick = parar;
-			var img =document.getElementById("boton1");
-			img.onclick = imagen;
-			var img1 =document.getElementById("boton2");
-			img1.onclick = imagen1;
-			var img1 =document.getElementById("boton3");
-			img1.onclick = imagen2;
-			var rut =document.getElementById("img1");
-			rut.onclick = ruta;
-			var rut2 =document.getElementById("img2");
-			rut2.onclick = ruta2;
-			var rut3 =document.getElementById("img3");
-			rut3.onclick = ruta3;
-}
-
-		function empezar(){
-			document.getElementById("play").disabled=true;
-			document.getElementById("stop").disabled=false;
-			document.getElementById("boton1").disabled=false;
-			document.getElementById("boton2").disabled=false;
-			document.getElementById("boton3").disabled=false;
-		}
-		function parar(){
-			document.getElementById("stop").disabled=true;
-			document.getElementById("play").disabled=false;
-			document.getElementById("boton1").disabled=true;
-			document.getElementById("boton2").disabled=true;
-			document.getElementById("boton3").disabled=true;
-			document.getElementById("img1").style.display="none";
-			document.getElementById("img2").style.display="none";
-			document.getElementById("img3").style.display="none";
-			document.getElementById("text1").value="";
-			document.getElementById("text2").value="";
-			document.getElementById("text3").value="";
-		}
-		function imagen(){
-			document.getElementById("img1").style.display="initial";
-		}
-		function imagen1(){
-			document.getElementById("img2").style.display="initial";
-		}
-		function imagen2(){
-			document.getElementById("img3").style.display="initial";
-		}
-		function ruta(){
-			document.getElementById("text1").value=document.getElementById("img1").src;
-		}
-		function ruta2(){
-			document.getElementById("text2").value=document.getElementById("img2").src;
-		}
-		function ruta3(){
-			document.getElementById("text3").value=document.getElementById("img3").src;
-		}
-	
-	</script>
-	</head>
-	
-
-<body>
-<table border="2">
-	<form>
-	<tr>
-		<td><INPUT TYPE="button" id= "boton1" name="b"  disabled/></td>
-		<td><img src="imagenes/1.jpg" width="20px" height="20px" id="img1" style="display:none" name="ima"/></td>
-		<td><INPUT TYPE="text" id="text1" name="texto" /></td>
-	</tr>
-	<tr>
-		<td><INPUT TYPE="button" id= "boton2" name="b"  disabled/></td>
-		<td><img src="imagenes/2.jpg" width="20px" height="20px" id="img2" style="display:none"  name="ima"/></td>
-		<td><INPUT TYPE="text" id="text2" name="texto" /></td>
-	</tr>
-	<tr>
-		<td><INPUT TYPE="button" id= "boton3" name="b"  disabled/></td>
-		<td><img src="imagenes/3.jpg" width="20px" height="20px" id="img3" style="display:none"  name="ima"/></td>
-		<td><INPUT TYPE="text" id="text3" name="texto" /></td>
-	</tr>
-		<tr>
-		<td><INPUT TYPE="button" id= "play"   value="start"/> </td>
-		<td><INPUT TYPE="button" id= "stop"  value ="stop" disabled/></td>
-		
-		</tr>
-
-	</form>
-</table>
-</body>
-</html>	
->>>>>>> 6286d7de3ca4d636e849d6866bbe09c589ffa6d0
