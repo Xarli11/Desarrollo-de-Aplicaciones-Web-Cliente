@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>mover imagen</title>
+    <script>
+        window.onload = function () {
+            var img = document.getElementById("imagen");
+            document.onclick = click();
+            function click(e){
+                let event = e || window.event;
+                let x = event.clientX;
+                let y = event.clientY;
+                img.style.left = x + "px";
+                img.style.top = y + "px";
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <img src="../img/bob.jpg" style='position:relative;left:0px;top:0px;' id="imagen" />
+
+    <body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Concesionario</title>
+    <style>
+        table,
+        tr,
+        td {
+            border: 2px solid black;
+            text-align: center;
+            border-collapse: collapse;
+        }
+
+        td,
+        tr {
+            width: 200px;
+            height: 150px;
+        }
+
+        div {
+            text-align: left;
+        }
+    </style>
+    <script language="JavaScript" type="text/javascript">
+        var arrayFord = new Array("Ka", "Fiesta", "B-Max", "Tourneo", "Ecosport", "Focus", "C-Max", "Kuga", "mondeo");
+        var preciosFord = new Array(7000, 9000, 10000, 11000, 10500, 12000, 12500, 13000, 13500);
+        var arrayPeugeot = new Array("108", "208", "308", "508", "2008", "3008", "5008", "partner", "traveller");
+        var preciosPeugeot = new Array(6000, 8000, 9500, 10000, 11500, 12000, 12500, 13000, 13500);
+        var arrayRenault = new Array("Twizy", "Clio", "Twingo", "Kangoo", "Captur", "Mégane", "Trafic", "Scénic", "Kadjar");
+        var preciosRenault = new Array(6500, 9500, 10000, 11500, 10500, 12800, 12500, 13000, 13500);
+        var precioTotal = 0;
+        var marcas;
+        var modelos;
+        var añadidoE = false, añadidoCB = false, añadidoCR = false;
+        window.onload = function () {
+            marcas = document.getElementById("marca");
+            marcas.onchange = mostrar;
+            modelos = document.getElementById("modelo");
+            modelos.onchange = precioModelo;
+            var extra = document.getElementsByName("extras");
+            var color = document.getElementsByName("color");
+            for (var i = 0; i < extra.length; i++) {
+                extra[i].onchange = precioExtra;
+            }
+            for (var i = 0; color.length; i++) {
+                color[i].onchange = precioColor;
+            }
+        }
+
+        function mostrar() {
+            document.getElementById("modelo").options.length = 0;
+            var Selected = marcas.value;
+            if (Selected == "Ford") {
+                document.getElementById("imagenMarca").src = "../img/Ford.png";
+                for (var i = 0; i < arrayFord.length; i++) {
+                    var modelOption = document.createElement("option");
+                    modelOption.value = arrayFord[i];
+                    modelOption.text = arrayFord[i];
+                    var optionCreated = document.getElementById("modelo");
+                    optionCreated.appendChild(modelOption);
+                }
+
+            }
+            else if (Selected == "Peugeot") {
+                document.getElementById("imagenMarca").src = "../img/Peugeot.png";
+                for (var i = 0; i < arrayPeugeot.length; i++) {
+                    var modelOption = document.createElement("option");
+                    modelOption.value = arrayPeugeot[i];
+                    modelOption.text = arrayPeugeot[i];
+                    var optionCreated = document.getElementById("modelo");
+                    optionCreated.appendChild(modelOption);
+                }
+            }
+            else if (Selected == "Renault") {
+                document.getElementById("imagenMarca").src = "../img/Renault.png";
+                for (var i = 0; i < arrayRenault.length; i++) {
+                    var modelOption = document.createElement("option");
+                    modelOption.value = arrayRenault[i];
+                    modelOption.text = arrayRenault[i];
+                    var optionCreated = document.getElementById("modelo");
+                    optionCreated.appendChild(modelOption);
+                }
+            }
+        }
+        function precioModelo() {
+            var modelIndex = modelos.selectedIndex;
+            var brandIndex = marcas.selectedIndex;
+            var modelSelected = modelos.options[modelIndex].value;
+            var brandSelected = marcas.options[brandIndex].value;
+            if (brandSelected == "Ford") {
+                precioTotal = preciosFord[modelIndex];
+            }
+            else if (brandSelected == "Peugeot") {
+                precioTotal = preciosPeugeot[modelIndex];
+            }
+            else if (brandSelected == "Renault") {
+                precioTotal = preciosRenault[modelIndex];
+            }
+            document.getElementById("precio").innerHTML = precioTotal;
+        }
+        function precioExtra() {
+            var extra = document.getElementsByName("extras");
+            for (var i = 0; i < extra.length; i++) {
+                if (extra[i].checked) {
+                    if (i == 0) {
+                        if (!añadidoE) {
+                            precioTotal += 1500;
+                            añadido = true;
+                        }
+                    }
+                    else if (i == 1) {
+                        if (añadidoE) {
+                            precioTotal -= 1500;
+                            añadido = false;
+                        }
+                    }
+                }
+            }
+            document.getElementById("precio").innerHTML = precioTotal;
+        }
+        function precioColor() {
+            var color = document.getElementsByName("color");
+            precioColor = 0;
+            for (var i = 0; i < color.length; i++) {
+                if (color[i].checked) {
+                    if (i == 0) {
+                        precioColor = 0;
+                    }
+                    else if (i == 1) {
+                        precioColor = 700;
+                    }
+                    else if (i == 2) {
+                        precioColor = 500;
+                    }
+                }
+            }
+            document.getElementById("precio").innerHTML = precioTotal + precioColor;
+        }
+    </script>
+
+<body>
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <label>Marca:</label><br />
+                    <select id="marca">
+                        <option>Peugeot</option>
+                        <option>Ford</option>
+                        <option>Renault</option>
+                    </select>
+                </td>
+                <td>
+                    <label>Extras:</label><br />
+                    <div>
+                        <input type="radio" name="extras" id="extras" value="con">Con Extras <br />
+                        <input type="radio" name="extras" id="extras" value="sin" checked>Sin Extras
+                    </div>
+                </td>
+                <td rowspan="2"><img id="imagenMarca" src="" width="200"></td>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Modelo:</label><br />
+                    <select id="modelo">
+                    </select>
+                </td>
+                <td>
+                    <label>Color:</label><br />
+                    <div>
+                        <input type="radio" name="color" id="color" value="blanco" checked>Blanco <br>
+                        <input type="radio" name="color" id="color" value="negro">Negro <br>
+                        <input type="radio" name="color" id="color" value="rojo">Rojo <br>
+
+
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><img id="imagenTipo" src="" width="200"></td>
+                <td id="celda"><label id="precio"></label></td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>
