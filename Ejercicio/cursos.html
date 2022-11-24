@@ -1,0 +1,190 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Examen</title>
+	<style>
+		table,
+		tr,
+		td {
+			border: 2px solid black;
+			text-align: center;
+			border-collapse: collapse;
+		}
+
+		td,
+		tr {
+			width: 200px;
+			height: 150px;
+		}
+
+		div {
+			text-align: center;
+		}
+	</style>
+	<script language="JavaScript" type="text/javascript">
+		var wem1 = ["SI", "BD", "PROG", "LM", "ENTORNOS"];
+		var ntwem1 = ["", "", "", "", ""];
+		var wem2 = ["DWS", "DWC", "DIW", "DAW"];
+		var ntwem2 = ["", "", "", ""];
+		var wem3 = ["SGE", "DI", "PSP", "AND"];
+		var ntwem3 = ["", "", "", ""];
+		window.onload = function () {
+			var curso = document.getElementById("cursos");
+			curso.onchange = rellenar;
+			var asig = document.getElementById("asignaturas");
+			asig.onchange = n_alum;
+			document.getElementById("S").onchange = ver;
+			document.getElementById("A").onchange = ver;
+
+		}
+		function rellenar() {
+			document.getElementById("num").value = "";
+			document.getElementById("aprobados").value = "";
+			document.getElementById("num").disabled = true;
+			document.getElementById("aprobados").disabled = true;
+			document.getElementById("resultado").innerHTML = "";
+			document.getElementById("asignaturas").innerHTML = "";
+			var curso = this.value;
+
+			if (curso == "1wem") {
+
+				llenado(wem1);
+			}
+			else if (curso == "2wem") {
+
+				llenado(wem2);
+
+			}
+			else {
+				llenado(wem3);
+			}
+		}
+		function llenado(array) {
+			var asig = document.getElementById("asignaturas");
+			for (var i = 0; i < array.length; i++) {
+				// Se crea una variable donde se guarda el elemento creado del tipo option
+				var opcion = document.createElement("option");
+				// Se crea un nodo de texto con el valor del array
+				var contenido = document.createTextNode(array[i]);
+				// Se añade el nodo de texto al elemento option
+				opcion.appendChild(contenido);
+				// Se añade el atributo value al elemento option
+				asig.appendChild(opcion);
+			}
+		}
+		function n_alum() {
+			//Se poner el numero de aprobados en blanco
+			document.getElementById("aprobados").value = "";
+			//Se desactiva el input de aprobados
+			document.getElementById("aprobados").disabled = false;
+			//Se pone el resultado en blanco
+			document.getElementById("resultado").innerHTML = "";
+
+			if (document.getElementById("cursos").value == "1wem") {
+				hacer(ntwem1);
+
+
+			} else if (document.getElementById("cursos").value == "2wem") {
+				hacer(ntwem2);
+			}
+			else {
+
+				hacer(ntwem3);
+			}
+		}
+		//Funcion que rellena el array con el numero de alumnos en la posicion del curso
+		function hacer(array) {
+			var indice = document.getElementById("asignaturas").selectedIndex;
+			if (array[indice] == "") {
+				var al = prompt("introduzca el nº de alumnos");
+				array[indice] = al;
+			}
+			document.getElementById("num").value = array[indice];
+		}
+		//Funcion que comprueba si el numero de aprobados es correcto
+		function ver() {
+			var por;
+			var total = document.getElementById("num").value;
+			var apro = document.getElementById("aprobados").value;
+			if (total != "" & apro != "") {
+				//Se calcula el porcentaje
+				var total = parseInt(total);
+				var apro = parseInt(apro);
+				//Se comprueba que el numero de aprobados no sea mayor que el total ni menor que 0
+				if (apro > total || apro < 0) {
+					alert("numero de aprobados valor erróneo");
+				} else { 
+					if (this.value == "S") {
+						var suspensos = total - apro;
+						por = suspensos * 100 / total;
+					}
+					else {
+
+						por = apro * 100 / total;
+					}
+					document.getElementById("resultado").innerHTML = "";
+					var parrafo = document.createElement("p");
+					var contenido = document.createTextNode(por);
+					parrafo.appendChild(contenido);
+					document.getElementById("resultado").appendChild(parrafo);
+				}
+			}
+		}
+	</script>
+
+<body>
+	<form>
+		<table>
+			<tr>
+				<td>
+					<label>Cursos:</label><br />
+					<select id="cursos">
+						<option>Selecciona un curso</option>
+						<option value="1wem">1º WEM</option>
+						<option value="2wem">2º WEM</option>
+						<option value="3wem">3º WEM</option>
+					</select>
+
+				</td>
+				<td>
+
+					<div>
+						<label>Nº Alumnos:</label><br />
+						<input type="text" id="num" value="" disabled> <br>
+						<label>Aprobados?:</label><br />
+						<input type="text" id="aprobados" value="" disabled> <br>
+					</div>
+
+			</tr>
+			<tr>
+				<td>
+					<label>Asgnaturas:</label><br />
+					<select id="asignaturas">
+					</select>
+				</td>
+				<td>
+					<h3>porcentajes</h3>
+					<div>
+						<input type="radio" id="A" name="notas" value="A">APROBADOS <br>
+						<input type="radio" id="S" name="notas" value="S">SUSPENSOS <br>
+
+					</div>
+				</td>
+				<td>
+					<h3>resultado porcentajes</h3>
+					<div id="resultado">
+					</div>
+				</td>
+			</tr>
+			<tr>
+
+
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>
