@@ -1,0 +1,272 @@
+<!-- Carlos Garcia Tovar -->
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Examen</title>
+	<style>
+		table,
+		tr,
+		td {
+			border: 2px solid black;
+			text-align: center;
+			border-collapse: collapse;
+		}
+
+		td,
+		tr {
+			width: 200px;
+			height: 150px;
+		}
+
+		div {
+			text-align: left;
+		}
+	</style>
+	<script language="JavaScript" type="text/javascript">
+
+		var Peras = ["Seleccionar opcion", "Española", "Conferencia"];
+		var preciosPeras = [3, 4];
+
+		var Manzanas = ["Seleccionar opcion", "Golden", "Royal Gala"];
+		var preciosManzanas = [2, 3];
+
+		var Platanos = ["Seleccionar opcion", "Banana", "Canario"];
+		var preciosPlatanos = [3, 4];
+
+		var Kiwis = ["Seleccionar opcion", "Verde", "Dorado"];
+		var preciosKiwis = [5, 6];
+
+		// Variables
+		var precioTotal = 0;
+
+		window.onload = function () {
+			var fruta = document.getElementById("frutas");
+			fruta.onchange = mostrarFrutas;
+			var variedad = document.getElementById("variedad");
+			variedad.onchange = mostrarPrecio;
+			var precio = document.getElementById("precio");
+			var total = document.getElementById("total");
+			total.onclick = calcularTotal;
+			var pago = document.getElementsByName("fpago");
+			for (var i = 0; i < pago.length; i++) {
+				pago[i].onchange = formaPago;
+			}
+			var monedas = document.getElementById("monedas");
+			monedas.onchange = calculoefectivo;
+			document.getElementById("Pago").onclick = pagoTarjeta;
+			document.getElementById().onchange = calculoefectivo;
+		}
+		function llenado(array) {
+			var variedad = document.getElementById("variedad");
+			for (var i = 0; i < array.length; i++) {
+				// Se crea una variable donde se guarda el elemento creado del tipo option
+				var opcion = document.createElement("option");
+				// Se crea un nodo de texto con el valor del array
+				var contenido = document.createTextNode(array[i]);
+				// Se añade el nodo de texto al elemento option
+				opcion.appendChild(contenido);
+				// Se añade el atributo value al elemento option
+				variedad.appendChild(opcion);
+			}
+		}
+		function mostrarFrutas() {
+			document.getElementById("variedad").options.length = 0;
+			var option = document.getElementById("frutas").value;
+			if (option == "Peras") {
+				for (var i = 0; i < Peras.length; i++) {
+					var frutaOption = document.createElement("option");
+					frutaOption.value = Peras[i];
+					frutaOption.text = Peras[i];
+					var optionCreated = document.getElementById("variedad");
+					optionCreated.appendChild(frutaOption);
+				}
+			}
+			else if (option == "Manzanas") {
+				for (var i = 0; i < Manzanas.length; i++) {
+					var frutaOption = document.createElement("option");
+					frutaOption.value = Manzanas[i];
+					frutaOption.text = Manzanas[i];
+					var optionCreated = document.getElementById("variedad");
+					optionCreated.appendChild(frutaOption);
+				}
+			}
+			else if (option == "Plátanos") {
+				for (var i = 0; i < Platanos.length; i++) {
+					var frutaOption = document.createElement("option");
+					frutaOption.value = Platanos[i];
+					frutaOption.text = Platanos[i];
+					var optionCreated = document.getElementById("variedad");
+					optionCreated.appendChild(frutaOption);
+				}
+			}
+			else if (option == "Kiwis") {
+				for (var i = 0; i < Kiwis.length; i++) {
+					var frutaOption = document.createElement("option");
+					frutaOption.value = Kiwis[i];
+					frutaOption.text = Kiwis[i];
+					var optionCreated = document.getElementById("variedad");
+					optionCreated.appendChild(frutaOption);
+				}
+			}
+
+		}
+		function mostrarPrecio() {
+			var precio = document.getElementById("precio");
+			var option = document.getElementById("frutas").value;
+			var option2 = document.getElementById("variedad").value;
+			if (option == "Peras") {
+				if (option2 == "Española") {
+					precio.value = preciosPeras[0];
+				}
+				if (option2 == "Conferencia") {
+					precio.value = preciosPeras[1];
+				}
+			}
+			else if (option == "Manzanas") {
+				if (option2 == "Golden") {
+					precio.value = preciosManzanas[0];
+				}
+				if (option2 == "Royal Gala") {
+					precio.value = preciosManzanas[1];
+				}
+			}
+			else if (option == "Plátanos") {
+				if (option2 == "Banana") {
+					precio.value = preciosPlatanos[0];
+				}
+				if (option2 == "Canario") {
+					precio.value = preciosPlatanos[1];
+				}
+			}
+			else if (option == "Kiwis") {
+				if (option2 == "Verde") {
+					precio.value = preciosKiwis[0];
+				}
+				if (option2 == "Dorado") {
+					precio.value = preciosKiwis[1];
+				}
+			}
+		}
+		function calcularTotal() {
+			var peso = document.getElementById("Peso").value;
+			var precio = document.getElementById("precio").value;
+			if (peso != "") {
+				precioTotal = peso * precio;
+				document.getElementById("Ptotal").value = precioTotal;
+			}
+			else {
+				alert("Porfavor introduzca un peso");
+			}
+
+		}
+		function calculoefectivo() {
+			var numMonedas = document.getElementById("monedas").value;
+			var cambio = document.getElementById("cambio").value;
+			if (numMonedas < precioTotal) {
+				alert("Porfavor introduzca un valor mayor al precio total");
+			}
+			else {
+				cambio = numMonedas - precioTotal;
+				document.getElementById("cambio").value = cambio;
+			}
+		}
+		function pagoTarjeta() {
+			var tarjeta = document.getElementById("Ntarjeta").value;
+			if (tarjeta = "") {
+				alert("Introduce un numero de tarjeta valido")
+			}
+			else {
+				document.getElementById("Ntarjeta").value = "";
+				alert("Pago realizado");
+			}
+		}
+		function formaPago() {
+			var pagos = document.getElementsByName("fpago");
+			document.getElementById("monedas").value = "";
+			document.getElementById("cambio").value = "";
+			document.getElementById("Ntarjeta").value = "";
+			for (var i = 0; i < pagos.length; i++) {
+				if (pagos[i].checked) {
+					if (i == 0) {
+
+						document.getElementById("Ntarjeta").disabled = false;
+						document.getElementById("monedas").disabled = true;
+						document.getElementById("Pago").disabled = false;
+					}
+					else if (i == 1) {
+
+						document.getElementById("Ntarjeta").disabled = true;
+						document.getElementById("monedas").disabled = false;
+
+
+					}
+				}
+			}
+
+		}
+
+	</script>
+
+<body>
+	<form>
+		<table>
+			<tr>
+				<td>
+					<h3>FRUTAS</h3>
+					<select name="frutas" id="frutas">
+						<option>Seleciona una Fruta...</option>
+						<option value="Peras">Peras</option>
+						<option value="Manzanas">Manzanas</option>
+						<option value="Plátanos">Plátanos</option>
+						<option value="Kiwis">Kiwis</option>
+
+					</select>
+
+				</td>
+				<td>
+					<h3>Introduzca peso</h3>
+					<div>
+						<h3> precio:</h3><input type="text" id="precio" value="" disabled> <br>
+						<h3> peso:</h3><input type="text" id="Peso" value=""> <br>
+					</div>
+				</td>
+				<td rowspan="2"><input type="button" id="total" value="Total"> <br></td>
+				<td rowspan="2"><input type="text" id="Ptotal" value="" disabled> <br>
+					<h3>Entrega:</h3><input type="text" id="monedas" value="" disabled> <br>
+					<h3>Cambio:</h3><input type="text" id="cambio" value="" disabled> <br>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3>Tipos de Fruta</h3>
+					<select id="variedad" name="variedad">
+					</select>
+				</td>
+				<td>
+					<h3>FORMA DE PAGO</h3>
+					<div>
+						<input type="radio" id="T" name="fpago" value="T">TARJETA <br>
+						<input type="radio" id="E" name="fpago" value="E">EFECTIVO <br>
+
+					</div>
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+
+				</td>
+				<td>
+					<h3>Nº de Tarjeta:</h3><input type="text" id="Ntarjeta" value="" disabled> <br>
+					<input type="button" id="Pago" value="Pagar" disabled>
+				</td>
+
+			</tr>
+		</table>
+	</form>
+</body>
+
+</html>

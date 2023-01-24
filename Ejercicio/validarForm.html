@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Validar Formulario</title>
+
+</html>
+
+<body>
+    Nombre: <input type="text" name="name" id="name"><label for="name1" id="nameError" hidden style="color: red ;">El
+        nombre es erróneo</label><br>
+    Telefono Movil: <input type="text" name="phone1" id="phone1"><label for="phone1" id="phone1Error" hidden
+        style="color: red ;">El numero es erróneo</label><br>
+    Telefono fijo: <input type="text" name="phone2" id="phone2"><label for="phone2" id="phone2Error" hidden
+        style="color: red ;">El numero es erróneo</label><br>
+    Email: <input type="text" name="email" id="email"><label for="email" id="emailError" hidden style="color: red ;">El
+        email es erróneo</label><br>
+    DNI: <input type="text" name="dni" id="dni"><label for="dni" id="dniError" hidden style="color: red ;">El DNI es
+        erróneo</label><br>
+    <input type="button" id="validar" value="Validar">
+    <button type="reset">Borrar</button>
+</body>
+<script>
+    window.onload = function () {
+        var name = document.getElementById("name");
+        var phone1 = document.getElementById("phone1");
+        var phone2 = document.getElementById("phone2");
+        var email = document.getElementById("email");
+        var dni = document.getElementById("dni");
+        var nameError = document.getElementById("nameError");
+        var phone1Error = document.getElementById("phone1Error");
+        var phone2Error = document.getElementById("phone2Error");
+        var emailError = document.getElementById("emailError");
+        var dniError = document.getElementById("dniError");
+        var validar = document.getElementById("validar");
+        var letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P',
+            'D', 'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 'C', 'K', 'E', 'T'];
+        name.onblur = nameCheck;
+        phone1.onblur = phone1Check;
+        phone2.onblur = phone2Check;
+        email.onblur = emailCheck;
+        dni.onblur = dniCheck;
+        validar.onlcik=validar;
+    }
+    function nameCheck() {
+        if (name.value.length !=0|| name.value=="") {
+            nameError.hidden = false;
+            return false;
+        }
+        else {
+            nameError.hidden = true;
+            return true;
+        }
+    }
+    function phone1Check() {
+        if (phone1.value.length != 9) {
+            phone1Error.hidden = false;
+            return false;
+        }
+        else {
+            phone1Error.hidden = true;
+            return true;
+        }
+    }
+    function phone2Check() {
+        if (phone2.value.length != 9) {
+            phone2Error.hidden = false;
+            return false;
+        }
+        else {
+            phone2Error.hidden = true;
+            return true;
+        }
+    }
+    function emailCheck() {
+        if (email.value.indexOf("@") == -1) {
+            emailError.hidden = false;
+            return false;
+        }
+        else {
+            emailError.hidden = true;
+            return true;
+        }
+    }
+    function dniCheck() {
+        if (dni.value.length != 9) {
+            dniError.hidden = false;
+            return false;
+        }
+        else {
+            dniError.hidden = true;
+            return true;
+        }
+    }
+    function validar(){
+        if(nameCheck() && phone1Check() && phone2Check() && emailCheck() && dniCheck()){
+            alert("El formulario es correcto");
+            for(var i=0;i<6;i++){
+                var parrafo = document.createElement("p");
+                var texto = document.createTextNode("El valor del campo "+i+" es "+document.getElementsByTagName("input")[i].value);
+            }
+        }
+        else{
+            alert("El formulario es incorrecto");
+        }
+    }
+</script>
+
+</html>
